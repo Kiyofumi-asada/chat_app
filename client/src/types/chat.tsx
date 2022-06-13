@@ -6,7 +6,7 @@ export type TChatData = {
   message: string;
   created_at: string;
   updated_at: string;
-  deleted: boolean;
+  isDelete: boolean;
 };
 
 export type ChatState = {

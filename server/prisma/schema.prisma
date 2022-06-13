@@ -19,5 +19,5 @@ model Chats {
   message String
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
-  deleted Boolean? @default(false)
+  isDelete Boolean? @default(false)
 }

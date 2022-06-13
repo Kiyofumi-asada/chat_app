@@ -8,7 +8,7 @@ type TProps = {
 const Chat: React.FC<TProps> = ({ chatData }) => {
   return (
     <>
-      {chatData.deleted ? null : (
+      {chatData.isDelete ? null : (
         <div className="flex px-4 py-3 hover:bg-gray-100">
           <div className="h-10 w-10 flex-shrink-0 rounded bg-gray-300"></div>
           <div className="ml-2">
