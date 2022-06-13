@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+  //TODO:後に追加したい機能（顔文字:スタンプ種別(Int?),クリック数(Int?)構造を検討）
+model Chats {
+  id Int @id @default(autoincrement())
+  userId Int @db.SmallInt
+  userName String @db.VarChar(255)
+  userIcon Bytes?
+  message String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  deleted Boolean? @default(false)
+}
