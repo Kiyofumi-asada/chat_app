@@ -4,7 +4,7 @@ import { prisma } from '@/infra';
 
 const router = express.Router();
 
-/* GET chat */
+// GET
 router.get('/', async (req, res, _next) => {
   try {
     const resData = await prismaChat.read();
@@ -14,11 +14,35 @@ router.get('/', async (req, res, _next) => {
   }
 });
 
-/* POST create chat */
+// POST
 router.post('/', async (req, res, next) => {
   try {
     const data = req.body;
     await prismaChat.create(data);
+    const resData = await prismaChat.read();
+    res.status(200).json(resData).send;
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//PUT
+router.put('/', async (req, res, next) => {
+  try {
+    const data = req.body;
+    await prismaChat.edit(data);
+    const resData = await prismaChat.read();
+    res.status(200).json(resData).send;
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//DELETE
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const id = Number(`${req.params.id}`);
+    await prismaChat.logicalDelete(id);
     const resData = await prismaChat.read();
     res.status(200).json(resData).send;
   } catch (err) {
