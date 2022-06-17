@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { postChatData } from '../../api/chat';
 
@@ -7,8 +7,7 @@ const PostMessage: React.FC = () => {
   const messageRef = React.useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
-    const content = postChatData({ userId: 1, userName: 'user1', message: messageRef.current?.value });
-    dispatch(content as any);
+    dispatch(postChatData({ userId: 1, userName: 'user1', message: messageRef.current?.value }) as any);
   };
 
   return (

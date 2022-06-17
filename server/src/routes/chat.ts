@@ -1,6 +1,5 @@
 import express from 'express';
 import { prismaChat } from '@/infra/chat';
-import { prisma } from '@/infra';
 
 const router = express.Router();
 
@@ -30,6 +29,7 @@ router.post('/', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
   try {
     const data = req.body;
+    console.log('#####', data.id);
     await prismaChat.edit(data);
     const resData = await prismaChat.read();
     res.status(200).json(resData).send;
