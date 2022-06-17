@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ChatState } from '../../types/chat';
 import { RootState } from '../store';
-import { fetchGetChatList, postChatData } from '../../api/chat';
+import { deleteChatData, fetchGetChatList, postChatData, putChatData } from '../../api/chat';
 
 const initialState: ChatState = {
   isLoading: false,
@@ -42,6 +42,38 @@ const chatSlice = createSlice({
       };
     });
     builder.addCase(postChatData.rejected, (state) => {
+      return {
+        ...state,
+        isLoading: false,
+        chatList: initialState.chatList,
+      };
+    });
+    // PUT
+    builder.addCase(putChatData.fulfilled, (state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        status: action.payload.status,
+        chatList: action.payload.data,
+      };
+    });
+    builder.addCase(putChatData.rejected, (state) => {
+      return {
+        ...state,
+        isLoading: false,
+        chatList: initialState.chatList,
+      };
+    });
+    // DELETE
+    builder.addCase(deleteChatData.fulfilled, (state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        status: action.payload.status,
+        chatList: action.payload.data,
+      };
+    });
+    builder.addCase(deleteChatData.rejected, (state) => {
       return {
         ...state,
         isLoading: false,
