@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { postChatData } from '../../api/chat';
+import { postChatData } from '../../../api/chat';
 
 const PostMessage: React.FC = () => {
+  //react,redux
   const dispatch = useDispatch();
-  const messageRef = React.useRef<HTMLInputElement>(null);
-
-  const handleSubmit = () => {
-    dispatch(postChatData({ userId: 1, userName: 'user1', message: messageRef.current?.value }) as any);
+  const [message, setMessage] = useState<string>('');
+  //function
+  const enterMessage = (v: any) => {
+    return setMessage(v);
   };
-
+  //dispatch
+  const handleSubmit = () => {
+    dispatch(postChatData({ userId: 1, userName: 'user1', message: message ?? '' }) as any);
+    setMessage('');
+  };
   return (
     <div className="mb-2 h-12 px-1 pb-1">
       <div className="flex items-center rounded-sm border border-gray-300 p-1">
-        <input
+        <textarea
           id="postChat"
-          className="ml-1 flex-grow resize-none border-gray-300 px-2 text-sm"
+          className="ml-1 flex-grow resize-none border-gray-300 px-2 text-sm focus:outline-none"
           placeholder="メッセージを送信する[⌘K]"
-          ref={messageRef}
-        ></input>
+          value={message}
+          onChange={(event) => {
+            enterMessage(event.target.value);
+          }}
+        ></textarea>
         <button
           type="button"
           onClick={handleSubmit}

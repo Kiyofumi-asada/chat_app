@@ -1,34 +1,26 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { deleteChatData, putChatData } from '../../api/chat';
-import { TChatData } from '../../types/chat';
-import ChatHoverMenu from './chat-hover-menu';
+import React, { useState } from 'react';
+import { TChatData } from '../../../types/chat';
+import { convertTimeZone2DateStr } from '../../converter';
+import ChatModalMenu from './chat-modal-menu';
 
 type TProps = {
   chatData: TChatData;
 };
 
 const Chat: React.FC<TProps> = ({ chatData }) => {
-  const dispatch = useDispatch();
-
-  const handleEdit = () => {
-    dispatch(putChatData({ id: chatData.id, userId: 1, userName: 'user1', message: 'hoge' }) as any);
-  };
-  const handleDelete = () => {
-    dispatch(deleteChatData(chatData.id) as any);
-  };
+  //react,redux
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  console.log(isEdit);
   return (
     <>
       {chatData.isDelete ? null : (
         <div className="group relative flex px-4 py-3 hover:bg-gray-100">
-          {/* <div onClick={handleDelete}>X</div>
-          <div onClick={handleEdit}>edit</div> */}
-          <ChatHoverMenu />
+          <ChatModalMenu chatData={chatData} setIsEdit={setIsEdit} />
           <div className="h-10 w-10 flex-shrink-0 rounded bg-gray-300"></div>
           <div className="ml-2">
             <div className="-mt-1">
               <span className="text-sm font-semibold">{chatData.userName}</span>
-              <span className="ml-1 text-xs text-gray-500">{chatData.updated_at}</span>
+              <span className="ml-1 text-xs text-gray-500">{convertTimeZone2DateStr(chatData.updated_at)}</span>
             </div>
             <p className="text-sm">{chatData.message}</p>
             <div className="mt-1 flex space-x-2">

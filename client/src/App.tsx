@@ -1,6 +1,6 @@
 import React from 'react';
 import { HotKeys } from 'react-hotkeys';
-import Main from './components/main';
+import Main from './presentation/components/main';
 
 const App: React.FC = () => {
   const hotKeyMap = {
