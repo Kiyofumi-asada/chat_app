@@ -23,9 +23,7 @@ const PostMessage: React.FC = () => {
           className="ml-1 flex-grow resize-none border-gray-300 px-2 text-sm focus:outline-none"
           placeholder="メッセージを送信する[⌘K]"
           value={message}
-          onChange={(event) => {
-            enterMessage(event.target.value);
-          }}
+          onChange={(event) => enterMessage(event.target.value)}
         ></textarea>
         <button
           type="button"
