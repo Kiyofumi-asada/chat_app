@@ -9,7 +9,6 @@ export const fetchGetChatList = createAsyncThunk('chat/getChatList', async () =>
   const { status, data } = await axios.get<TChatData[]>(path);
   return { status, data };
 });
-
 // POST
 export const postChatData = createAsyncThunk('chat/postChatData', async (body: any) => {
   const { status, data } = await axios.post<TChatData[]>(path, body);
@@ -23,7 +22,6 @@ export const putChatData = createAsyncThunk('chat/putChatData', async (body: any
 // DELETE
 export const deleteChatData = createAsyncThunk('chat/deleteChatData', async (id: any) => {
   const deletePath = `${path}/${id}`;
-  console.log(deletePath);
   const { status, data } = await axios.delete<TChatData[]>(deletePath);
   return { status, data };
 });

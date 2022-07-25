@@ -1,6 +1,7 @@
 import React from 'react';
 import { HotKeys } from 'react-hotkeys';
-import Main from './components/main';
+import Main from './presentation/components/main';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 const App: React.FC = () => {
   const hotKeyMap = {
@@ -16,7 +17,14 @@ const App: React.FC = () => {
   };
   return (
     <HotKeys keyMap={hotKeyMap} handlers={hotKeyHandlers}>
-      <Main />
+      <div className="app">
+        <BrowserRouter>
+          <Routes>
+            {/* <Route index element={} /> */}
+            <Route path="chat" element={<Main />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </HotKeys>
   );
 };
