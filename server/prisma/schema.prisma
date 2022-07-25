@@ -15,7 +15,7 @@ model Chats {
   id Int @id @default(autoincrement())
   userId Int @db.SmallInt
   userName String @db.VarChar(255)
-  userIcon Bytes?
+  userIcon String? @db.VarChar(1000)
   message String
   created_at DateTime @default(now())
   updated_at DateTime @default(now())

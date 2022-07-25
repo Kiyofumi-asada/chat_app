@@ -6,7 +6,6 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
 import indexRouter from './routes/index';
-import usersRouter from './routes/users';
 import chatRouter from './routes/chat';
 
 class App {
@@ -31,8 +30,8 @@ class App {
 
   private routerSetup() {
     this.app.use('/', indexRouter);
-    this.app.use('/users', usersRouter);
     this.app.use('/chat', chatRouter);
+    this.app.use('/login', chatRouter);
   }
 
   private errorHandler() {
